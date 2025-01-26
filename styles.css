@@ -1,0 +1,201 @@
+/* Basic Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('pexels-padrinan-3930091.jpg'); /* Add your image here */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    position: relative;
+    padding-bottom: 60px; /* Space for the footer */
+}
+
+/* Dull the background image using a semi-transparent overlay */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here (0.5 for moderate dullness) */
+    z-index: -1; /* Ensure it stays behind the content */
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333; /* Solid background color for the navbar */
+    position: fixed; /* Fixed positioning to make it stick at the top */
+    top: 0; /* Ensure it's at the top */
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the navbar stays on top of other content */
+    height: 60px; /* Set a fixed height to avoid shifting */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+}
+
+/* Logo Styling */
+.navbar .logo video {
+    max-width: 80px;
+    height: auto;
+}
+
+/* Navbar Links */
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 30px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.nav-links li a:hover {
+    color: #4CAF50;
+}
+
+/* Main Content */
+header {
+    text-align: center;
+    padding: 120px 0 20px; /* Adjust padding for header */
+    color: #ffffff;
+    margin-top: 60px; /* Adjust margin to avoid overlap with navbar */
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+    width: 60%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.search-bar button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #4CAF50;
+}
+
+.search-bar #camera-btn {
+    padding: 10px;
+    background-color: transparent;
+    color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    right: 60px;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.search-bar #search-btn {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-left: 1px;
+}
+
+/* Tool Information Section */
+#tool-info {
+    padding: 20px;
+    margin-top: 40px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    display: none;
+}
+
+#tool-info h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 0; /* Ensure no margins are pushing h2 out */
+    padding-top: 10px; /* Add space above for visibility */
+}
+
+/* Section for Historical Facts, About Us, and Learn */
+#historical-description, #ABOUT-description, #learn-description {
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-top: 40px; /* Ensure there's space above */
+}
+
+.description-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-top: 105px; /* Ensure heading is not hidden */
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    padding: 1px 0;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: relative; /* Changed from fixed to relative */
+    margin-top: auto; /* Push footer to the bottom if there's not enough content */
+    z-index: 1000;
+}
+
+/* Footer Links */
+footer a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: white;
+}

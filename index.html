@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Insight</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <video src="Your paragraph text (2).mp4" autoplay muted loop></video>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="historical-facts.html">Historical Facts</a></li>
+            <li><a href="learn.html">Learn</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <header>
+        <h1>Welcome to Tool Insight</h1>
+        <div class="search-bar">
+            <input type="text" id="tool-description" placeholder="Describe your tool or upload an image">
+            <button id="camera-btn" onclick="triggerFileInput()">
+                📷
+            </button>
+            <input type="file" id="file-upload" style="display:none;">
+            <button id="search-btn">
+                🔍
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Tool Information -->
+        <section id="tool-info" style="display:none;">
+            <h2 id="tool-name"></h2>
+            <p id="tool-description-text"></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Send us an email: <a href="mailto:info@toolinsight.com">info@toolinsight.com</a></p>
+    </footer>
+
+    <script>
+        function triggerFileInput() {
+            document.getElementById('file-upload').click();
+        }
+
+        // Handle the search functionality
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const description = document.getElementById('tool-description').value;
+            const toolInfo = document.getElementById('tool-info');
+            const toolName = document.getElementById('tool-name');
+            const toolDescription = document.getElementById('tool-description-text');
+
+            // Check for text-based search
+            if (description.toLowerCase().includes('hammer')) {
+                toolName.textContent = 'Hammer';
+                toolDescription.textContent = 'A hammer is a tool used to hit, strike, or break things. There are different types of hammers used for specific applications.';
+                toolInfo.style.display = 'block';
+            } else {
+                toolName.textContent = 'Tool Not Found';
+                toolDescription.textContent = 'Sorry, we could not find information on the tool you described or uploaded.';
+                toolInfo.style.display = 'block';
+            }
+
+            // Handle image upload search
+            const fileInput = document.getElementById('file-upload');
+            if (fileInput.files.length > 0) {
+                let formData = new FormData();
+                formData.append("file", fileInput.files[0]);
+
+                fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.prediction) {
+                        toolName.textContent = 'Predicted Tool: ' + data.prediction;
+                        toolDescription.textContent = 'Description of the predicted tool will be shown here.';
+                        toolInfo.style.display = 'block';
+                    } else {
+                        toolName.textContent = 'Tool Not Found';
+                        toolDescription.textContent = 'Sorry, we could not predict the tool.';
+                        toolInfo.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    toolName.textContent = 'Error';
+                    toolDescription.textContent = 'An error occurred while processing your request.';
+                    toolInfo.style.display = 'block';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
