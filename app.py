@@ -7,7 +7,7 @@ import os
 
 
 # Configure API Key
-genai.configure(api_key="AIzaSyCKObDUccEduVBBBm1z49Fcf7dRvbMWlOU")
+genai.configure(api_key="")
 
 app = Flask(__name__, template_folder='.')
 
