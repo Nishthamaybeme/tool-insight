@@ -1,105 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tool Insight</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tool Insight</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Your Original CSS (unchanged) */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    .search-bar-container {
+      width: 600px;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-bar input[type="text"] {
+      width: 100%;
+      padding: 12px 60px 12px 15px;
+      font-size: 16px;
+      border: 1px solid #ffffff;
+      border-radius: 25px;
+      height: 45px;
+      box-sizing: border-box;
+    }
+
+    .button-container {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .camera-btn {
+      width: 40px;
+      height: 37px;
+      background-image: url('5563.jpg');
+      background-size: cover;
+      background-position: center;
+      border: none;
+      cursor: pointer;
+    }
+
+    .search-btn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .camera-btn:hover,
+    .search-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    #image-preview-container {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    #image-preview {
+      max-width: 100%;
+      height: 300px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #tool-info {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Hide the default file input */
+    #file-upload {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .camera-btn:hover {
+      background-color: #51cfa1;
+    }
+
+    .search-btn:hover {
+      background-color: #51cfa1;
+    }
+
+    .camera-btn:hover::after {
+      content: "Click to capture!";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .search-btn:hover::after {
+      content: "Search";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* Additional styles for the result container */
+    #result-container {
+      display: none; /* Hidden initially */
+      margin-top: 20px;
+      width: 1450px;
+      max-width: 1450px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      flex-direction: row;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    #result-image {
+      width: 200px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #result-text {
+      flex-grow: 1;
+    }
+
+    /* Keep navbar static */
+    .navbar {
+      position: static;
+      width: 100%;
+      background: #070707;
+      color: #fff;
+      padding: 10px;
+    }
+    footer {
+    background-color: #565454;
+    padding: 1px 0;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: relative; /* Changed from fixed to relative */
+    margin-top: auto; /* Push footer to the bottom if there's not enough content */
+    z-index: 1000;
+}
+  </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo">
-            <video src="Your paragraph text (2).mp4" autoplay muted loop></video>
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="historical-facts.html">Historical Facts</a></li>
-            <li><a href="learn.html">Learn</a></li>
-        </ul>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">
+      <video src="Your paragraph text (5).mp4" autoplay muted loop></video>
     </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about-us.html">About Us</a></li>
+      <li><a href="historical-facts.html">Historical Facts</a></li>
+      <li><a href="learn.html">Learn</a></li>
+    </ul>
+  </div>
 
-    <!-- Main Content -->
-    <header>
-        <h1>Welcome to Tool Insight</h1>
-        <div class="search-bar">
-            <input type="text" id="tool-description" placeholder="Describe your tool or upload an image">
-            <button id="camera-btn" onclick="triggerFileInput()">
-                📷
-            </button>
-            <input type="file" id="file-upload" style="display:none;">
-            <button id="search-btn">
-                🔍
-            </button>
+  <!-- Header with Search Bar -->
+  <header>
+    <h1>Welcome to Tool Insight</h1>
+    <div class="search-bar-container">
+      <div class="search-bar">
+        <input type="text" id="tool-description" placeholder="Describe your tool or upload an image..." />
+        <div class="button-container">
+          <!-- Hidden file input -->
+          <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)" />
+          <!-- Camera button -->
+          <button class="camera-btn" onclick="document.getElementById('file-upload').click()"></button>
+          <!-- Search button -->
+          <button class="search-btn">🔍</button>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <main>
-        <!-- Tool Information -->
-        <section id="tool-info" style="display:none;">
-            <h2 id="tool-name"></h2>
-            <p id="tool-description-text"></p>
-        </section>
-    </main>
+  <!-- Main Content -->
+  <main>
+    <!-- Two-column result container: Image on left, text on right -->
+    <div id="result-container">
+      <img id="result-image" src="" alt="Uploaded Image" />
+      <div id="result-text">
+        <h2 id="tool-name">Prediction</h2>
+        <p id="tool-description-text"></p>
+      </div>
+    </div>
+  </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>Send us an email: <a href="mailto:info@toolinsight.com">info@toolinsight.com</a></p>
-    </footer>
+  <!-- Footer -->
+  <footer>
+    <p>Send us an email: <a href="mailto:info@toolinsight.com">info@toolinsight.com</a></p>
+  </footer>
 
-    <script>
-        function triggerFileInput() {
-            document.getElementById('file-upload').click();
-        }
+  <!-- Include Marked.js for Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-        // Handle the search functionality
-        document.getElementById('search-btn').addEventListener('click', function() {
-            const description = document.getElementById('tool-description').value;
-            const toolInfo = document.getElementById('tool-info');
-            const toolName = document.getElementById('tool-name');
-            const toolDescription = document.getElementById('tool-description-text');
+  <!-- Custom Script -->
+  <script>
+    // Helper function to clear previous results
+    function clearPreviousOutput() {
+      document.getElementById('result-image').src = "";
+      document.getElementById('result-text').innerHTML =
+        '<h2 id="tool-name">Prediction</h2><p id="tool-description-text"></p>';
+    }
 
-            // Check for text-based search
-            if (description.toLowerCase().includes('hammer')) {
-                toolName.textContent = 'Hammer';
-                toolDescription.textContent = 'A hammer is a tool used to hit, strike, or break things. There are different types of hammers used for specific applications.';
-                toolInfo.style.display = 'block';
-            } else {
-                toolName.textContent = 'Tool Not Found';
-                toolDescription.textContent = 'Sorry, we could not find information on the tool you described or uploaded.';
-                toolInfo.style.display = 'block';
-            }
+    // Variable to store the uploaded image's data URL (if any)
+    let uploadedImageDataUrl = "";
 
-            // Handle image upload search
-            const fileInput = document.getElementById('file-upload');
-            if (fileInput.files.length > 0) {
-                let formData = new FormData();
-                formData.append("file", fileInput.files[0]);
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          uploadedImageDataUrl = e.target.result;
+          // Immediately show the uploaded image in the result container.
+          document.getElementById('result-image').src = uploadedImageDataUrl;
+          // Show the result container with default text.
+          document.getElementById('result-container').style.display = 'flex';
+          document.getElementById('tool-name').textContent = "Successfully uploaded the image !";
+          document.getElementById('tool-description-text').textContent = "Click the search button.";
+        };
+        reader.readAsDataURL(file);
+      }
+    }
 
-                fetch('/predict', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.prediction) {
-                        toolName.textContent = 'Predicted Tool: ' + data.prediction;
-                        toolDescription.textContent = 'Description of the predicted tool will be shown here.';
-                        toolInfo.style.display = 'block';
-                    } else {
-                        toolName.textContent = 'Tool Not Found';
-                        toolDescription.textContent = 'Sorry, we could not predict the tool.';
-                        toolInfo.style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    toolName.textContent = 'Error';
-                    toolDescription.textContent = 'An error occurred while processing your request.';
-                    toolInfo.style.display = 'block';
-                });
-            }
-        });
-    </script>
+    // Handle search functionality
+    document.querySelector('.search-btn').addEventListener('click', function () {
+      // Always clear previous output.
+      clearPreviousOutput();
+
+      const objectName = document.getElementById('tool-description').value.trim();
+      const fileInput = document.getElementById('file-upload');
+      const hasFile = fileInput.files.length > 0;
+      const hasText = objectName !== "";
+
+      // Check that only one input is provided.
+      if ((hasFile && hasText)) {
+        alert("Please provide only one input: either an image or a description, not both.");
+        return;
+      }
+      if (!hasFile && !hasText) {
+        alert("Please provide an image or type a description before searching.");
+        return;
+      }
+
+      // Show the result container and set a loading state.
+      document.getElementById('result-container').style.display = 'flex';
+      document.getElementById('tool-name').textContent = "Loading...";
+      document.getElementById('tool-description-text').textContent = "Please wait while we process your request.";
+
+      // If an image is provided, update the result image.
+      if (hasFile) {
+        const currentFile = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          uploadedImageDataUrl = e.target.result;
+          document.getElementById('result-image').src = uploadedImageDataUrl;
+        };
+        reader.readAsDataURL(currentFile);
+      } else {
+        // Clear image if only text is provided.
+        document.getElementById('result-image').src = "";
+      }
+
+      // Prepare the form data.
+      const formData = new FormData();
+      formData.append("object_name", objectName);
+      if (hasFile) {
+        formData.append("image", fileInput.files[0]);
+      }
+
+      // Send request to backend.
+      fetch('http://127.0.0.1:5000/analyze', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('tool-name').textContent = "Prediction";
+        // Convert markdown to HTML using marked.js.
+        const htmlContent = marked.parse(data.description);
+        document.getElementById('tool-description-text').innerHTML = htmlContent;
+        // Clear file input after search for subsequent searches.
+        fileInput.value = "";
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('tool-description-text').textContent = "An error occurred. Please try again.";
+      });
+    });
+  </script>
 </body>
-</html>
+</html> 
